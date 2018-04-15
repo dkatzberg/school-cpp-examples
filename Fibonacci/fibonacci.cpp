@@ -1,5 +1,5 @@
 /* Copyright: Daniel Katzberg
-This solution is explicit without templates, headers and functions.
+This solution is without templates, self coded headers and functions.
 Every non Fibonacci Number will be replaced by -1
 */
 #include <iostream>
