@@ -1,6 +1,7 @@
 /* Copyright: Daniel Katzberg
 This solution is without templates, self coded headers and functions.
-Every non Fibonacci Number will be replaced by -1
+This solution handles the correct start of the fibonacci numbers:
+0 1 1 2 3 5 ...
 */
 #include <iostream>
 
