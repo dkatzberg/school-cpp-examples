@@ -9,8 +9,9 @@ using namespace std;
 int main()
 {
     int lines, columns;
-    int lastFibonacci, secondLastFibonacci;
-    int nextFibonacci = -1; //Ignore this number for the first init runs
+    unsigned long lastFibonacci = 0;
+    unsigned long secondLastFibonacci = 0;
+    unsigned long nextFibonacci = 0;
     bool tableOutput = true;
 
     //Read number of lines and columns
@@ -25,38 +26,36 @@ int main()
 
     int tableArray[lines][columns];
 
-    //Init -> Write all numbers into the table array
-    for (int l = 0; l < lines; l++) {
-      for (int c = 0; c < columns; c++) {
-        tableArray[l][c] = (l * columns) + c;
-      }
-    }
-
     //Check Fibonacci Numbers : Init
     for (int l = 0; l < lines; l++) {
       for (int c = 0; c < columns; c++) {
 
-        //All Numbers until 3 are Fibonacci
-
-        //Init -> First non Fibonacci
-        if (tableArray[l][c] == 4) {
-          tableArray[l][c] = -1;
-          lastFibonacci = 3;
-          secondLastFibonacci = 2;
-          nextFibonacci = lastFibonacci + secondLastFibonacci;
+        //The two if blocks are needet for the second 1 in the Fibonacci Order
+        //0 1 1 2 3 ...
+        //You have to set the last Fibonacci Number, because the nextFibonacci is the Default variable
+        if (lastFibonacci == 1 && nextFibonacci == 1) {
+          tableArray[l][c] = nextFibonacci;
+          lastFibonacci = 2;
+          nextFibonacci = 1;
+          continue;
+        }
+        if (lastFibonacci == 2 && nextFibonacci == 1) {
+          tableArray[l][c] = lastFibonacci;
+          secondLastFibonacci = 0;
+          lastFibonacci = 1;
         }
 
-        //Replacement for non Fibonacci numbers
-        if (tableArray[l][c] > 4 && tableArray[l][c] < nextFibonacci ) {
-          tableArray[l][c] = -1;
-        }
+        //Set the Fibonacci Number
+        tableArray[l][c] = nextFibonacci;
 
-        //Find the next Fibonacci Number
-        if (tableArray[l][c] > 4 && tableArray[l][c] == nextFibonacci ) {
-          secondLastFibonacci = lastFibonacci;
-          lastFibonacci = tableArray[l][c];
-          nextFibonacci = lastFibonacci + secondLastFibonacci;
+        //Set the next Fibonacci number
+        secondLastFibonacci = lastFibonacci;
+        if (lastFibonacci == 0) {
+          lastFibonacci += 1;
+        } else {
+          lastFibonacci = nextFibonacci;
         }
+        nextFibonacci = lastFibonacci + secondLastFibonacci;
       }
     }
 
@@ -64,12 +63,7 @@ int main()
     if (tableOutput) {
       for (int l = 0; l < lines; l++) {
         for (int c = 0; c < columns; c++) {
-          if (tableArray[l][c] != -1) {
-            cout << tableArray[l][c];
-          } else {
-            cout << "--";
-          }
-          cout << " ";
+          cout << tableArray[l][c] << " ";
         }
         cout << "\n";
       }
@@ -77,10 +71,7 @@ int main()
     } else {
       for (int l = 0; l < lines; l++) {
         for (int c = 0; c < columns; c++) {
-          if (tableArray[l][c] != -1) {
-            cout << tableArray[l][c];
-            cout << " ";
-          }
+          cout << tableArray[l][c] << " ";
         }
       }
     }
