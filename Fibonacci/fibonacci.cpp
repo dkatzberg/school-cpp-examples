@@ -10,9 +10,9 @@ using namespace std;
 int main()
 {
     int lines, columns;
-    unsigned long lastFibonacci = 0;
-    unsigned long secondLastFibonacci = 0;
-    unsigned long nextFibonacci = 0;
+    unsigned long long int lastFibonacci = 0;
+    unsigned long long int secondLastFibonacci = 0;
+    unsigned long long int nextFibonacci = 0;
     bool tableOutput = true;
 
     //Read number of lines and columns
