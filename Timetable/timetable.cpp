@@ -9,12 +9,6 @@ This program is an example for calculation of a class timetable.
 February, 2019
 */
 
-//2D Array for the timetable representation.
-int timetable[5][5];
-
-//Timetable Counter. How often is a lesson set in the week?
-int timetableCounter[10];
-
 //The number of max days in the timetable.
 const int maxNumberDays = 5;
 
@@ -24,14 +18,19 @@ const int maxNumberLessonPerDay = 5;
 //The max number of different lessons in the timetable.
 const int maxNumberOfDifferentLessons = 10;
 
+//2D Array for the timetable representation.
+int timetable[maxNumberDays][maxNumberLessonPerDay];
+
+//Timetable Counter. How often is a lesson set in the week?
+int timetableCounter[maxNumberOfDifferentLessons];
+
 //All available lessons in an array
 const string allLessons[maxNumberOfDifferentLessons] = {"German", "History", "English", "Mathematics", "French", "Information science", "Sport", "Biology", "Physics", "Chemistry"};
 
 /*
-This method is for manually entering the classes into the
-time table
+Prints only the welcome screen and all lessons.
 */
-void timeTableManuallyInput() {
+void welcomeScreen() {
     cout << "Welcome. You can enter all classes.\n";
     cout << "The timetable has five days with 5 hours per day.\n";
     cout << "Check all classes and enter just the classes.\n";
@@ -40,7 +39,13 @@ void timeTableManuallyInput() {
     for (int lessonIndex = 0; lessonIndex < maxNumberOfDifferentLessons; lessonIndex++) {
         cout << allLessons[lessonIndex] << ": " << (lessonIndex + 1) << "\n";
     }
+}
 
+/*
+This method is for manually entering the classes into the
+time table
+*/
+void timeTableManuallyInput() {
     int tempLesson = 0;
 
     //Read all lesson for all days
@@ -51,7 +56,6 @@ void timeTableManuallyInput() {
             //Input until a correct answer is given by the user
             //This method will run minimum one time.
             while (tempLesson < 1 || tempLesson > maxNumberOfDifferentLessons) {
-                cout << tempLesson;
                 cout <<"  Lesson " << (lesson + 1) << ": ";
                 cin >> tempLesson;
                 if (!cin || tempLesson < 1 || tempLesson > maxNumberOfDifferentLessons) {
@@ -130,6 +134,9 @@ The main method for starting the application.
 */
 int main()
 {
+    //Just the welcome screen
+    welcomeScreen();
+
     //Read all lessons
     timeTableManuallyInput();
 
